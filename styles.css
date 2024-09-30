@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Milonga&family=Nothing+You+Could+Do&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --font-heading: 'Milonga', 'Georgia', serif;
+    --font-accent: 'Nothing You Could Do', 'Comic Sans', sans-serif;
+    --font-body: 'Poppins', 'Helvetica', 'Arial', sans-serif;
+    --corner-small: 4px;
+    --corner-large: 8px;
+    --padding-standard: 60px;
+    --padding-button: 5px 10px;
+    --padding-card: 40px 80px;
+    --gap-small: 10px;
+    --gap-standard: 20px;
+    --shadow-large: 0px 5px 15px #121212;
+    --shadow-small: 0px 2px 2px #353535;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+    height: 100vh;
+    background: url('./images/shelf-background-01.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 { font-family: var(--font-heading); }
+h2 { font-family: var(--font-accent); }
+h3, h4, h5, h6, p, ul, ol, a, button { font-family: var(--font-body); }
+
+h1 { 
+    font-size: 3rem; 
+    margin: 0px 0px 10px 0px;
+}
+
+button {
+    background: url('./images/texture-01.png');
+    background-size: cover;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: var(--corner-small);
+    border: 2px solid black;
+    padding: var(--padding-button);
+    box-shadow: var(--shadow-small);
+}
+
+#header {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    background: url('./images/placard-02.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: visible;
+    padding: 100px 0px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    filter: drop-shadow(--shadow-large);
+    width: 450px;
+    z-index: 101;
+}
+
+#menu {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gap-small);
+}
+
+#grid-container {
+    position: relative;
+    top: 300px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: var(--gap-standard);
+    padding: var(--padding-standard);
+}
+
+.card {
+    border-radius: var(--corner-large);
+    width: 400px;
+    height: auto;
+
+    /* img {
+        width: 400px;
+        max-width: 90vw;
+    } */
+
+    .text-container ::before {
+        background-image: url('./images/book-image-01.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
