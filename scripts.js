@@ -60,7 +60,7 @@ btnSubmit.addEventListener('click', (event) => {
         document.getElementById('input_title').value,
         document.getElementById('input_author').value,
         document.getElementById('input_yearPublished').value,
-        document.getElementById('input_status')
+        document.getElementById('input_status').value
     );
     myLibrary.push(book);
 

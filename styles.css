@@ -106,5 +106,13 @@ button:hover {
 
     .text-container {
         text-align: center;
+
+        .status_progress {
+            color: orange;
+        }
+
+        .status_completed {
+            color: green;
+        }
     }
 }
