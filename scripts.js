@@ -23,8 +23,10 @@ function drawBooks() {
         //Create card
         const card = document.createElement('div');
         card.classList.add('card');
+        card.setAttribute('data-index', i);
+        console.log(card.dataset);
 
-        //Add text to card
+        //Add content to card
         const textContainer = document.createElement('div');
         textContainer.classList.add('text-container');
         const title = document.createElement('h2');
