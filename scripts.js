@@ -50,15 +50,23 @@ function populateBooks() {
         const status = document.createElement('p');
         status.textContent = `Status: ${myLibrary[i].status}`;
 
-        card.appendChild(textContainer);
-        textContainer.appendChild(title);
-        textContainer.appendChild(author);
-        textContainer.appendChild(yearPublished);
-        textContainer.appendChild(status);
-        gridContainer.appendChild(card);
+        card.append(textContainer);
+        textContainer.append(title, author, yearPublished, status);
+        gridContainer.append(card);
     }
 }
 
 function addBookToLibrary() {
-    // Do stuff
+    // Clear any existing cards
+    const gridContainer = document.querySelector('#grid-container');
+
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.lastChild);
+    };
+
+    //Prompt for additions
+
+
+    // Repopulate cards from modified array
+    populateBooks();
 }
