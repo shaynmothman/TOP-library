@@ -38,11 +38,6 @@ function populateBooks() {
         const card = document.createElement('div');
         card.classList.add('card');
 
-        //Create image background
-        // const image = document.createElement('img');
-        // image.setAttribute('src', './images/book-image-01.png');
-        // image.setAttribute('alt', 'book cover');
-
         //Create and add text to card
         const textContainer = document.createElement('div');
         textContainer.classList.add('text-container');
@@ -60,7 +55,6 @@ function populateBooks() {
         textContainer.appendChild(author);
         textContainer.appendChild(yearPublished);
         textContainer.appendChild(status);
-        // card.appendChild(image);
         gridContainer.appendChild(card);
     }
 }
