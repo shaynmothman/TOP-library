@@ -1,27 +1,8 @@
 window.onload = function() {
-    populateBooks();
+    drawBooks();
 }
 
-const myLibrary = [
-    {
-        title: 'Dracula',
-        author: 'Bram Stoker',
-        yearPublished: '1897',
-        status: 'Completed',
-    },
-    {
-        title: 'The Passage',
-        author: 'Justin Cronin',
-        yearPublished: '2010',
-        status: 'Completed',
-    },
-    {
-        title: 'The Fifth Season',
-        author: 'N.K. Jemisin',
-        yearPublished: '2015',
-        status: 'Completed',
-    },
-];
+let myLibrary = [];
 
 function Book(title, author, yearPublished, status) {
     this.title = title;
@@ -30,15 +11,20 @@ function Book(title, author, yearPublished, status) {
     this.status = status;
 }
 
-function populateBooks() {
+function drawBooks() {
     const gridContainer = document.querySelector('#grid-container');
+
+    // Clear any existing cards
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.lastChild);
+    };
 
     for (let i = 0; i < myLibrary.length; i++) {
         //Create card
         const card = document.createElement('div');
         card.classList.add('card');
 
-        //Create and add text to card
+        //Add text to card
         const textContainer = document.createElement('div');
         textContainer.classList.add('text-container');
         const title = document.createElement('h2');
@@ -60,29 +46,31 @@ const btnAdd = document.querySelector('#btn-add');
 const dialog = document.querySelector('#dialog-add');
 
 btnAdd.addEventListener('click', (event) => {
+    //Reset form inputs
+    document.getElementById('form_add_book').reset();
+
     dialog.showModal();
-    addBookToLibrary();
 });
 
-function addBookToLibrary() {
-    const btnClose = document.querySelectorAll('.btn-close');
-    const btnSubmit = document.querySelector('#btn-submit');
+const btnSubmit = document.querySelector('#btn-submit');
 
-    btnSubmit.addEventListener('click', (event) => {
-        // Add book to array
+btnSubmit.addEventListener('click', (event) => {
+    // Add book to array
+    const book = new Book(
+        document.getElementById('input_title').value,
+        document.getElementById('input_author').value,
+        document.getElementById('input_yearPublished').value,
+        document.getElementById('input_status')
+    );
+    myLibrary.push(book);
 
-        // Clear any existing cards
-        const gridContainer = document.querySelector('#grid-container');
+    //Repopulate cards from modified array
+    drawBooks();
+});
 
-        while (gridContainer.firstChild) {
-            gridContainer.removeChild(gridContainer.lastChild);
-        };
+const btnClear = document.querySelector('#btn-clear');
 
-        //Repopulate cards from modified array
-        populateBooks();
-    });
-
-    btnClose.addEventListener('click', (event) => {
-        dialog.close();
-    });
-}
+btnClear.addEventListener('click', (event) => {
+    myLibrary = [];
+    drawBooks();
+})
