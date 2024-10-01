@@ -35,9 +35,12 @@ function drawBooks() {
         author.textContent = `Author: ${myLibrary[i].author}`;
         const yearPublished = document.createElement('p');
         yearPublished.textContent = `Published: ${myLibrary[i].yearPublished}`;
-        const status = document.createElement('p');
-        status.classList.add('status');
-        status.textContent = `Status: ${myLibrary[i].status}`;
+        const statusLabel = document.createElement('p');
+        statusLabel.textContent = `Status: `;
+        const status = document.createElement('span');
+        status.setAttribute('id', 'status');
+        status.textContent = `${myLibrary[i].status}`;
+        statusLabel.append(status);
 
         //Create button
         const btnDelete = document.createElement('img');
@@ -46,7 +49,7 @@ function drawBooks() {
         btnDelete.setAttribute('alt', 'trash can icon');
 
         card.append(textContainer, btnDelete);
-        textContainer.append(title, author, yearPublished, status);
+        textContainer.append(title, author, yearPublished, statusLabel);
         gridContainer.append(card);
     }
 }
