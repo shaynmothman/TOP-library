@@ -55,12 +55,12 @@ function populateBooks() {
         const status = document.createElement('p');
         status.textContent = `Status: ${myLibrary[i].status}`;
 
-        // card.appendChild(image);
         card.appendChild(textContainer);
         textContainer.appendChild(title);
         textContainer.appendChild(author);
         textContainer.appendChild(yearPublished);
         textContainer.appendChild(status);
+        // card.appendChild(image);
         gridContainer.appendChild(card);
     }
 }

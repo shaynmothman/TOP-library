@@ -57,8 +57,8 @@ button {
     background-size: cover;
     background-position: center;
     overflow: visible;
-    padding: 100px 0px;
-    position: fixed;
+    padding: 110px 0px;
+    position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
     filter: drop-shadow(--shadow-large);
@@ -79,22 +79,25 @@ button {
     flex-flow: row wrap;
     justify-content: center;
     gap: var(--gap-standard);
-    padding: var(--padding-standard);
+    /* margin: var(--padding-standard); */
+    height: 60vh;
+    overflow-y: scroll;
 }
 
 .card {
     border-radius: var(--corner-large);
     width: 400px;
-    height: auto;
+    height: 500px;
+    background: url('./images/book-image-01.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(--shadow-large);
 
-    /* img {
-        width: 400px;
-        max-width: 90vw;
-    } */
-
-    .text-container ::before {
-        background-image: url('./images/book-image-01.png');
-        background-repeat: no-repeat;
-        background-size: contain;
+    .text-container {
+        text-align: center;
     }
 }
