@@ -7,19 +7,19 @@ const myLibrary = [
         title: 'Dracula',
         author: 'Bram Stoker',
         yearPublished: '1897',
-        status: 'read',
+        status: 'Completed',
     },
     {
         title: 'The Passage',
         author: 'Justin Cronin',
         yearPublished: '2010',
-        status: 'read',
+        status: 'Completed',
     },
     {
         title: 'The Fifth Season',
         author: 'N.K. Jemisin',
         yearPublished: '2015',
-        status: 'read',
+        status: 'Completed',
     },
 ];
 
@@ -56,32 +56,33 @@ function populateBooks() {
     }
 }
 
+const btnAdd = document.querySelector('#btn-add');
+const dialog = document.querySelector('#dialog-add');
+
+btnAdd.addEventListener('click', (event) => {
+    dialog.showModal();
+    addBookToLibrary();
+});
+
 function addBookToLibrary() {
-    // Clear any existing cards
-    const gridContainer = document.querySelector('#grid-container');
-
-    while (gridContainer.firstChild) {
-        gridContainer.removeChild(gridContainer.lastChild);
-    };
-
-    //Prompt for additions
-    const btnAdd = document.querySelector('#btn-add');
-    const dialog = document.querySelector('#dialog-add');
-    const btnClose = document.querySelector('#btn-close');
+    const btnClose = document.querySelectorAll('.btn-close');
     const btnSubmit = document.querySelector('#btn-submit');
-
-    btnAdd.addEventListener('click', (event) => {
-        dialog.showModal();
-    });
 
     btnSubmit.addEventListener('click', (event) => {
         // Add book to array
+
+        // Clear any existing cards
+        const gridContainer = document.querySelector('#grid-container');
+
+        while (gridContainer.firstChild) {
+            gridContainer.removeChild(gridContainer.lastChild);
+        };
+
+        //Repopulate cards from modified array
+        populateBooks();
     });
 
     btnClose.addEventListener('click', (event) => {
         dialog.close();
     });
-
-    // Repopulate cards from modified array
-    populateBooks();
 }
