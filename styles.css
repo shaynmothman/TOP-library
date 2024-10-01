@@ -59,8 +59,7 @@ button:hover {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    background: url('./images/placard-02.png');
-    background-repeat: no-repeat;
+    background: url('./images/placard-02.png') no-repeat;
     background-size: cover;
     background-position: center;
     overflow: visible;
@@ -73,9 +72,9 @@ button:hover {
     z-index: 101;
 }
 
-#menu {
+.menu {
     display: flex;
-    flex-flow: row wrap;
+    /* flex-flow: row wrap; */
     gap: var(--gap-small);
 }
 
@@ -95,24 +94,36 @@ button:hover {
     border-radius: var(--corner-large);
     width: 400px;
     height: 500px;
-    background: url('./images/book-image-01.png');
+    background: url('./images/book-image-01.png') no-repeat;
     background-size: contain;
-    background-repeat: no-repeat;
     background-position: center;
     display: flex;
+    flex-flow: column wrap;
     align-items: center;
     justify-content: center;
+    gap: var(--gap-standard);
     filter: drop-shadow(--shadow-large);
+
+    img {
+        width: 25px;
+        height: auto;
+    }
+
+    #btn-edit:hover {
+        filter: invert(20%) sepia(100%) saturate(6);
+    }
+
+    #btn-delete:hover {
+        filter: invert(20%) sepia(100%) saturate(5) hue-rotate(-45deg);
+    }
 
     .text-container {
         text-align: center;
+    }
 
-        .status_progress {
-            color: orange;
-        }
-
-        .status_completed {
-            color: green;
-        }
+    .status {
+        font-style: italic;
+        text-decoration: underline;
+        color: blue;
     }
 }
