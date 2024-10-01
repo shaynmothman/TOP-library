@@ -65,7 +65,22 @@ function addBookToLibrary() {
     };
 
     //Prompt for additions
+    const btnAdd = document.querySelector('#btn-add');
+    const dialog = document.querySelector('#dialog-add');
+    const btnClose = document.querySelector('#btn-close');
+    const btnSubmit = document.querySelector('#btn-submit');
 
+    btnAdd.addEventListener('click', (event) => {
+        dialog.showModal();
+    });
+
+    btnSubmit.addEventListener('click', (event) => {
+        // Add book to array
+    });
+
+    btnClose.addEventListener('click', (event) => {
+        dialog.close();
+    });
 
     // Repopulate cards from modified array
     populateBooks();
