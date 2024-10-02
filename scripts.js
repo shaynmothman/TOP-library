@@ -1,7 +1,3 @@
-window.onload = function() {
-    drawBooks();
-}
-
 let myLibrary = [];
 
 function Book(title, author, yearPublished, status) {
@@ -11,18 +7,48 @@ function Book(title, author, yearPublished, status) {
     this.status = status;
 }
 
+const handleAddClick = (event) => {
+    document.getElementById('form-add-book').reset();
+    const dialogAdd = document.querySelector('#dialog-add');
+    dialogAdd.showModal();
+};
+document.querySelector('#btn-add').addEventListener('click', handleAddClick);
+
+const handleSubmitClick = (event) => {
+    const book = new Book(
+        document.getElementById('input_title').value,
+        document.getElementById('input_author').value,
+        document.getElementById('input_yearPublished').value,
+        document.getElementById('input_status').value
+    );
+    myLibrary.push(book);
+    drawBooks();
+};
+document.querySelector('#btn-submit').addEventListener('click', handleSubmitClick);
+
+//Delete all books
+const btnClear = document.querySelector('#btn-clear');
+
+btnClear.addEventListener('click', (event) => {
+    myLibrary = [];
+    drawBooks();
+})
+
+//Draw all books in array
 function drawBooks() {
     const gridContainer = document.querySelector('#grid-container');
 
-    // Clear any existing cards
+    //Delete any existing cards
     while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.lastChild);
     };
 
+    //Iterate through array
     for (let i = 0; i < myLibrary.length; i++) {
         //Create card
         const card = document.createElement('div');
         card.classList.add('card');
+        card.setAttribute('id', `card-${i}`); //Unique identifier
 
         //Add content to card
         const textContainer = document.createElement('div');
@@ -33,6 +59,7 @@ function drawBooks() {
         author.textContent = `Author: ${myLibrary[i].author}`;
         const yearPublished = document.createElement('p');
         yearPublished.textContent = `Published: ${myLibrary[i].yearPublished}`;
+
         const statusLabel = document.createElement('p');
         statusLabel.textContent = `Status: `;
         const status = document.createElement('span');
@@ -41,85 +68,51 @@ function drawBooks() {
         status.textContent = `${myLibrary[i].status}`;
         statusLabel.append(status);
 
-        //Create button
+        //Create delete button
         const btnDelete = document.createElement('img');
         btnDelete.setAttribute('id', 'btn-delete');
         btnDelete.setAttribute('src', './images/trash-can.svg');
         btnDelete.setAttribute('alt', 'trash can icon');
-        btnDelete.setAttribute('data-index', i);
 
+        //Draw cards on page
         card.append(textContainer, btnDelete);
         textContainer.append(title, author, yearPublished, statusLabel);
         gridContainer.append(card);
-    }
 
-    const statusEdit = document.querySelectorAll('.status');
-    const dialogEdit = document.querySelector('#dialog-edit');
-
-    statusEdit.forEach((status) => {
         status.addEventListener('click', (event) => {
             const book = myLibrary[event.target.dataset.index];
-            const editTitle = document.querySelector('#edit_title');
-            const editAuthor = document.querySelector('#edit_author');
-            const editYear = document.querySelector('#edit_yearPublished');
-            const editStatus = document.querySelector('#edit_status');
-    
-            editTitle.value = book.title;
-            editAuthor.value = book.author;
-            editYear.value = book.yearPublished;
-            editStatus.value = book.status;
-    
-            dialogEdit.showModal();
-    
-            const btnSave = document.querySelector('#btn-save');
-    
-            btnSave.addEventListener('click', (event) => {
-                // Update book
-                book.title = editTitle.value;
-                book.author = editAuthor.value;
-                book.yearPublished = editYear.value;
-                book.status = editStatus.value;
-    
-                drawBooks();
-
-                delete book;
-            });
+            editBook(book);
         });
-    })
+    }
 }
 
-const btnAdd = document.querySelector('#btn-add');
-const dialogAdd = document.querySelector('#dialog-add');
+function editBook(book) {
+    const dialogEdit = document.querySelector('#dialog-edit');
+    const inputTitle = document.querySelector('#edit_title');
+    const inputAuthor = document.querySelector('#edit_author');
+    const inputYear = document.querySelector('#edit_yearPublished');
+    const inputStatus = document.querySelector('#edit_status');
 
-btnAdd.addEventListener('click', (event) => {
-    //Reset form inputs
-    document.getElementById('form-add-book').reset();
+    //Set form content
+    inputTitle = book.title;
+    inputAuthor = book.author;
+    inputYear = book.yearPublished;
+    inputStatus = book.status;
 
-    dialogAdd.showModal();
-});
+    dialogEdit.showModal();
 
-const btnSubmit = document.querySelector('#btn-submit');
+    const btnSave = document.querySelector('#btn-save');
 
-btnSubmit.addEventListener('click', (event) => {
-    // Add book to array
-    const book = new Book(
-        document.getElementById('input_title').value,
-        document.getElementById('input_author').value,
-        document.getElementById('input_yearPublished').value,
-        document.getElementById('input_status').value
-    );
-    myLibrary.push(book);
+    btnSave.addEventListener('click', (event) => {
+        //Update book in array
+        book.title = inputTitle.value;
+        book.author = inputAuthor.value;
+        book.yearPublished = inputYear.value;
+        book.status = editStatus.value;
 
-    //Repopulate cards from modified array
-    drawBooks();
-});
-
-const btnClear = document.querySelector('#btn-clear');
-
-btnClear.addEventListener('click', (event) => {
-    myLibrary = [];
-    drawBooks();
-})
+        drawBooks();
+    })
+}
 
 const btnDelete = document.querySelector('#btn-delete');
 btnDelete.addEventListener('click', (event) => {
