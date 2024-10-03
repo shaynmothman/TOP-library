@@ -7,6 +7,7 @@ function Book(title, author, yearPublished, status) {
     this.status = status;
 }
 
+//Open 'add a book' dialog
 const handleAddClick = (event) => {
     document.getElementById('form-add-book').reset();
     const dialogAdd = document.querySelector('#dialog-add');
@@ -14,6 +15,7 @@ const handleAddClick = (event) => {
 };
 document.querySelector('#btn-add').addEventListener('click', handleAddClick);
 
+//Add and draw book
 const handleSubmitClick = (event) => {
     const book = new Book(
         document.getElementById('input_title').value,
@@ -26,13 +28,12 @@ const handleSubmitClick = (event) => {
 };
 document.querySelector('#btn-submit').addEventListener('click', handleSubmitClick);
 
-//Delete all books
-const btnClear = document.querySelector('#btn-clear');
-
-btnClear.addEventListener('click', (event) => {
+//Clear library
+const handleClearAllClick = (event) => {
     myLibrary = [];
     drawBooks();
-})
+};
+document.querySelector('#btn-clear').addEventListener('click', handleClearAllClick);
 
 //Draw all books in array
 function drawBooks() {
@@ -70,9 +71,10 @@ function drawBooks() {
 
         //Create delete button
         const btnDelete = document.createElement('img');
-        btnDelete.setAttribute('id', 'btn-delete');
+        btnDelete.classList.add('btn-delete');
         btnDelete.setAttribute('src', './images/trash-can.svg');
         btnDelete.setAttribute('alt', 'trash can icon');
+        btnDelete.setAttribute('data-index', i);
 
         //Draw cards on page
         card.append(textContainer, btnDelete);
@@ -80,45 +82,51 @@ function drawBooks() {
         gridContainer.append(card);
 
         status.addEventListener('click', (event) => {
-            const book = myLibrary[event.target.dataset.index];
-            editBook(book);
+            let book = myLibrary[event.target.dataset.index];
+            editBook(book, i);
+        });
+
+        btnDelete.addEventListener('click', (event) => {
+            let deleted = myLibrary.splice(i, 1);
+            drawBooks();
         });
     }
 }
 
-function editBook(book) {
+function editBook(book, i) {
     const dialogEdit = document.querySelector('#dialog-edit');
     const inputTitle = document.querySelector('#edit_title');
     const inputAuthor = document.querySelector('#edit_author');
     const inputYear = document.querySelector('#edit_yearPublished');
     const inputStatus = document.querySelector('#edit_status');
 
+    //Save book identifier
+    dialogEdit.setAttribute('data-index', i);
+
     //Set form content
-    inputTitle = book.title;
-    inputAuthor = book.author;
-    inputYear = book.yearPublished;
-    inputStatus = book.status;
+    inputTitle.value = book.title;
+    inputAuthor.value = book.author;
+    inputYear.value = book.yearPublished;
+    inputStatus.value = book.status;
 
     dialogEdit.showModal();
-
-    const btnSave = document.querySelector('#btn-save');
-
-    btnSave.addEventListener('click', (event) => {
-        //Update book in array
-        book.title = inputTitle.value;
-        book.author = inputAuthor.value;
-        book.yearPublished = inputYear.value;
-        book.status = editStatus.value;
-
-        drawBooks();
-    })
 }
 
-const btnDelete = document.querySelector('#btn-delete');
-btnDelete.addEventListener('click', (event) => {
-    //Get card index from dataset
-    //Find element in array
-    //Delete element in array
+const handleSaveClick = (event) => {
+    const dialogEdit = document.querySelector('#dialog-edit');
+    const inputTitle = document.querySelector('#edit_title');
+    const inputAuthor = document.querySelector('#edit_author');
+    const inputYear = document.querySelector('#edit_yearPublished');
+    const inputStatus = document.querySelector('#edit_status');
+    let i = dialogEdit.dataset.index;
+
+    myLibrary[i] = {
+        title: inputTitle.value,
+        author: inputAuthor.value,
+        yearPublished: inputYear.value,
+        status: inputStatus.value,
+    };
 
     drawBooks();
-})
+};
+document.querySelector('#btn-save').addEventListener('click', handleSaveClick);

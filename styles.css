@@ -109,11 +109,7 @@ button:hover {
         height: auto;
     }
 
-    #btn-edit:hover {
-        filter: invert(20%) sepia(100%) saturate(6);
-    }
-
-    #btn-delete:hover {
+    .btn-delete:hover {
         filter: invert(20%) sepia(100%) saturate(5) hue-rotate(-45deg);
     }
 
@@ -125,5 +121,9 @@ button:hover {
         font-style: italic;
         text-decoration: underline;
         color: blue;
+    }
+
+    .status:hover {
+        font-style: normal;
     }
 }
