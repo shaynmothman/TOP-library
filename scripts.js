@@ -71,20 +71,33 @@ function drawBooks() {
         status.textContent = `${myLibrary[i].status}`;
         statusLabel.append(status);
 
-        //Create delete button
+        //Create buttons
+        const btnContainer = document.createElement('div');
+        btnContainer.classList.add('menu');
         const btnDelete = document.createElement('img');
         btnDelete.classList.add('btn-delete');
         btnDelete.setAttribute('src', './images/trash-can.svg');
         btnDelete.setAttribute('alt', 'trash can icon');
         btnDelete.setAttribute('data-index', i);
+        const btnEdit = document.createElement('img');
+        btnEdit.setAttribute('src', './images/pencil.svg');
+        btnDelete.setAttribute('alt', 'pencil icon');
+        btnEdit.setAttribute('data-index', i);
 
         //Draw cards on page
-        card.append(textContainer, btnDelete);
+        btnContainer.append(btnEdit, btnDelete);
+        card.append(textContainer, btnContainer);
         textContainer.append(title, author, yearPublished, statusLabel);
         gridContainer.append(card);
 
         //Handle status clicks
         status.addEventListener('click', (event) => {
+            let book = myLibrary[event.target.dataset.index];
+            editBook(book, i);
+        });
+
+        //Handle edit button clicks
+        btnEdit.addEventListener('click', (event) => {
             let book = myLibrary[event.target.dataset.index];
             editBook(book, i);
         });
@@ -136,3 +149,20 @@ const handleSaveClick = (event) => {
     drawBooks();
 };
 document.querySelector('#btn-save').addEventListener('click', handleSaveClick);
+
+const checkDialogOpen = (event) => {
+if (event.key === 'Enter') {
+    let clickEvent = new Event('click');
+    const dialogAdd = document.querySelector('#dialog-add');
+    const dialogEdit = document.querySelector('#dialog-edit');
+
+    if (dialogAdd.open) {
+        document.querySelector('#btn-submit').dispatchEvent(clickEvent);
+    } else if (dialogEdit.open) {
+        document.querySelector('#btn-save').dispatchEvent(clickEvent);
+    } else {
+        //Do nothing
+    }
+}
+}
+document.addEventListener('keydown', checkDialogOpen);

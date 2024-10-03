@@ -111,6 +111,10 @@ button:hover {
         height: auto;
     }
 
+    .btn-edit:hover {
+        filter: invert(20%) sepia(100%) saturate(5) hue-rotate(-45deg);
+    }
+
     .btn-delete:hover {
         filter: invert(20%) sepia(100%) saturate(5) hue-rotate(-45deg);
     }

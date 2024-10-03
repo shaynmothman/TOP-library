@@ -22,16 +22,16 @@
             <p>Use the form below to add a book to the library.</p>
             <form id='form-add-book' method="dialog">
                 <label for="title">Title:</label>
-                <input type="text" id="input_title" name="title" placeholder="Title">
+                <input type="text" id="input_title" name="title" placeholder="Title" required>
 
                 <label for="author">Author:</label>
-                <input type="text" id="input_author" name="author" placeholder="Author">
+                <input type="text" id="input_author" name="author" placeholder="Author" required>
 
                 <label for="yearPublished">Year Published:</label>
-                <input type="text" id="input_yearPublished" name="yearPublished" placeholder="2024">
+                <input type="text" id="input_yearPublished" name="yearPublished" placeholder="2024" required>
 
                 <label for="status">Status:
-                    <select id="input_status">
+                    <select id="input_status" required>
                         <option>Choose...</option>
                         <option value="Not Started">Not Started</option>
                         <option value="In Progress">In Progress</option>
@@ -50,16 +50,16 @@
             <p>Use the form below to edit the details of this book.</p>
             <form id="form-edit-book" method="dialog">
                 <label for="title">Title:</label>
-                <input type="text" id="edit_title" name="title" placeholder="Title">
+                <input type="text" id="edit_title" name="title" placeholder="Title" required>
 
                 <label for="author">Author:</label>
-                <input type="text" id="edit_author" name="author" placeholder="Author">
+                <input type="text" id="edit_author" name="author" placeholder="Author" required>
 
                 <label for="yearPublished">Year Published:</label>
-                <input type="text" id="edit_yearPublished" name="yearPublished" placeholder="2024">
+                <input type="text" id="edit_yearPublished" name="yearPublished" placeholder="2024" required>
                 
                 <label for="edit_status">Status:
-                    <select id="edit_status">
+                    <select id="edit_status" required>
                         <option>Choose...</option>
                         <option value="Not Started">Not Started</option>
                         <option value="In Progress">In Progress</option>
