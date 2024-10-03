@@ -13,7 +13,7 @@
     --gap-standard: 20px;
     --shadow-large: 0px 5px 15px #121212;
     --shadow-small: 0px 2px 2px #353535;
-    --color-highlight: #dcbb89;
+    --color-highlight: #f5efdc;
 }
 
 * {
@@ -30,12 +30,14 @@ body {
 
 h1 { font-family: var(--font-heading); }
 h2 { font-family: var(--font-accent); }
-h3, h4, h5, h6, p, ul, ol, a, button { font-family: var(--font-body); }
+h3, h4, h5, h6, p, ul, ol, a, button, label { font-family: var(--font-body); }
 
 h1 { 
     font-size: 3rem; 
     margin: 0px 0px 10px 0px;
 }
+
+label { font-size: 0.9rem; }
 
 button {
     background: url('./images/texture-01.png');
@@ -126,4 +128,28 @@ button:hover {
     .status:hover {
         font-style: normal;
     }
+}
+
+dialog {
+    max-width: 300px;
+    border-radius: var(--corner-large);
+    background-color: var(--color-highlight);
+}
+
+dialog[open] form {
+    >*, select {
+        width: 100%;
+    }
+
+    input, select, button {
+        margin-bottom: var(--gap-small);
+    }
+
+    .menu {
+        margin: var(--gap-small) 0px;
+    }
+}
+
+dialog[open]::backdrop {
+    background-color: #00000075;
 }
