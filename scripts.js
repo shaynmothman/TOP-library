@@ -1,5 +1,7 @@
+//Initialize array
 let myLibrary = [];
 
+//Create book prototype
 function Book(title, author, yearPublished, status) {
     this.title = title;
     this.author = author;
@@ -81,11 +83,13 @@ function drawBooks() {
         textContainer.append(title, author, yearPublished, statusLabel);
         gridContainer.append(card);
 
+        //Handle status clicks
         status.addEventListener('click', (event) => {
             let book = myLibrary[event.target.dataset.index];
             editBook(book, i);
         });
 
+        //Handle delete clicks
         btnDelete.addEventListener('click', (event) => {
             let deleted = myLibrary.splice(i, 1);
             drawBooks();
@@ -118,6 +122,8 @@ const handleSaveClick = (event) => {
     const inputAuthor = document.querySelector('#edit_author');
     const inputYear = document.querySelector('#edit_yearPublished');
     const inputStatus = document.querySelector('#edit_status');
+
+    //Get book identifier
     let i = dialogEdit.dataset.index;
 
     myLibrary[i] = {
